@@ -9,10 +9,9 @@ class Migration(migrations.Migration):
     dependencies = [
         ('user', '0001_initial'),
     ]
-
     operations = [
         migrations.CreateModel(
-            name='OtpUser',
+            name='UserOtp',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('otp', models.CharField(blank=True, max_length=8, null=True)),
