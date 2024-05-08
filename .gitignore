@@ -1,3 +1,4 @@
 env_chat/
 static/
 static_root/
+dump.rdb
