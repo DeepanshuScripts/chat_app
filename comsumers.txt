@@ -1,0 +1,17 @@
+The connect method of the ChatConsumer is what determines how a websocket responds to a request to connect to it. What self.scope["url_route"]["kwargs"] does is it allows us access the url parameters of a websocket. The parameter we were looking to get in this case was the room name. We'll see how it is defined later in this article. We then name the group, Join it and accept the websocket connection.
+
+The disconnect method leaves the group and breaks up the connection with the socket.
+
+The receive method handles how messages from the websocket is handled. In our code we specify the type of message here. This is usually done from the frontend if we have different types of messages coming over one websocket connection.
+
+In the chat_message we then use the room name to get which conversation this chat belongs to and save the messages to the database. The message is then sent to all the other rooms in the group and sent back to the web sockets of the respective rooms through self.send in the chat_message method.
+
+NOTE: The "type": "chat_message" in the dict being sent is important as it specifies which method handles the message. In our case we only have one type of message so we only need the chat_message type and method.
+
+A simplified form of how messages are transmitted over websocket after connection:
+
+    You send the message to your websocket.
+
+    The content of the message is routed to where it should be processed (the chat_message method) by the receive method.
+
+    The processed message is sent back to you and every body else connected to the same websocket.(The chat_message method)
