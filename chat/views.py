@@ -1,17 +1,5 @@
-from django.shortcuts import render
 from rest_framework import status
-from django.shortcuts import redirect
 from django.contrib.auth.models import AnonymousUser
-
-def index(request):
-    return render(request,'base.html',{})
-
-
-# def room(request,room_name):
-#     return render(request,'chatroom.html',{
-#         'room_name':room_name
-#     })
-
 from django.shortcuts import render
 from .models import Conversation
 from rest_framework.decorators import api_view
@@ -22,6 +10,16 @@ from django.db.models import Q
 from django.shortcuts import redirect, reverse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+
+
+def index(request):
+    return render(request,'base.html',{})
+
+
+# def room(request,room_name):
+#     return render(request,'chatroom.html',{
+#         'room_name':room_name
+#     })
 
     
 class CreateChatRoom(APIView):
@@ -45,6 +43,7 @@ class CreateChatRoom(APIView):
 
 
 class GetChatRoom(APIView):
+    permission_classes = [IsAuthenticated]
     @staticmethod
     def get(request, convo_id):
         conversation = Conversation.objects.filter(id=convo_id)

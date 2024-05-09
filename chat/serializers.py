@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        exclude = ('conversation_id',)
+        exclude = ('conversation',)
 
 
 class ConversationListSerializer(serializers.ModelSerializer):
